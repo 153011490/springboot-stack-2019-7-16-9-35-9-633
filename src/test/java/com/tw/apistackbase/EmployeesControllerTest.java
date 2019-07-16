@@ -65,4 +65,26 @@ public class EmployeesControllerTest {
                         "]"));
     }
 
+    @Test
+    public void should_return_expected_employees_when_calls_get_all_employees() throws Exception {
+        this.mockMvc.perform(get("/employees?page=1&pageSize=2")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 0,\n" +
+                        "        \"name\": \"employee0\",\n" +
+                        "        \"age\": 0,\n" +
+                        "        \"gender\": \"Female\",\n" +
+                        "        \"salary\": 0\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"employee1\",\n" +
+                        "        \"age\": 1,\n" +
+                        "        \"gender\": \"Female\",\n" +
+                        "        \"salary\": 5000\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
 }

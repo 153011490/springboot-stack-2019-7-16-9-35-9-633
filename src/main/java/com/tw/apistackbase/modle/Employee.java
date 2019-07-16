@@ -10,8 +10,9 @@ public class Employee {
     private String gender;
     private double salary;
 
+    private static List<Employee> employees=new ArrayList<>();
+
     public static List<Employee> createEmployees(){
-        List<Employee> employees=new ArrayList<>();
         for (int i = 0; i <3 ; i++) {
             Employee employee=new Employee();
             employee.setId(i);
@@ -22,6 +23,21 @@ public class Employee {
             employees.add(employee);
         }
         return employees;
+    }
+
+    public static List<Employee> getEmployees(int page,int pageSize){
+        if(page<=0||pageSize<=0)return null;
+        List<Employee> employeeList=new ArrayList<>();
+        if(page*pageSize>employees.size()){
+            for (int i = (page-1)*pageSize; i < employees.size(); i++) {
+                employeeList.add(employees.get(i));
+            }
+        }else{
+            for (int i = (page-1)*pageSize; i < page*pageSize; i++) {
+                employeeList.add(employees.get(i));
+            }
+        }
+        return employeeList;
     }
 
     public int getId() {
