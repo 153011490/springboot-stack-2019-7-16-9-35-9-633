@@ -50,4 +50,19 @@ public class EmployeesControllerTest {
                         "]"));
     }
 
+    @Test
+    public void should_return_expected_employees_when_call_get_employee() throws Exception {
+        this.mockMvc.perform(get("/employees/1")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"employee1\",\n" +
+                        "        \"age\": 1,\n" +
+                        "        \"gender\": \"Female\",\n" +
+                        "        \"salary\": 5000\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
 }
