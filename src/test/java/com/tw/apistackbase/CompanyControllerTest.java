@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -205,6 +206,149 @@ public class CompanyControllerTest {
                         "    {\n" +
                         "        \"id\": 2,\n" +
                         "        \"name\": \"company1\",\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 0,\n" +
+                        "                \"name\": \"employee0\",\n" +
+                        "                \"age\": 0,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 0\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 1,\n" +
+                        "                \"name\": \"employee1\",\n" +
+                        "                \"age\": 1,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 5000\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 2,\n" +
+                        "                \"name\": \"employee2\",\n" +
+                        "                \"age\": 2,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 10000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
+    @Test
+    public void should_return_expected_companies_when_call_add_company_given_company() throws Exception {
+        String json=" {\n" +
+                "        \"id\": 4,\n" +
+                "        \"name\": \"company4\",\n" +
+                "        \"employees\": [\n" +
+                "            {\n" +
+                "                \"id\": 0,\n" +
+                "                \"name\": \"employee0\",\n" +
+                "                \"age\": 0,\n" +
+                "                \"gender\": \"Female\",\n" +
+                "                \"salary\": 0\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"id\": 1,\n" +
+                "                \"name\": \"employee1\",\n" +
+                "                \"age\": 1,\n" +
+                "                \"gender\": \"Female\",\n" +
+                "                \"salary\": 5000\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"id\": 2,\n" +
+                "                \"name\": \"employee2\",\n" +
+                "                \"age\": 2,\n" +
+                "                \"gender\": \"Female\",\n" +
+                "                \"salary\": 10000\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    }";
+        this.mockMvc.perform(post("/companies").content(json).contentType("application/json;chaset=UTF-8")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"company0\",\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 0,\n" +
+                        "                \"name\": \"employee0\",\n" +
+                        "                \"age\": 0,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 0\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 1,\n" +
+                        "                \"name\": \"employee1\",\n" +
+                        "                \"age\": 1,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 5000\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 2,\n" +
+                        "                \"name\": \"employee2\",\n" +
+                        "                \"age\": 2,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 10000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 2,\n" +
+                        "        \"name\": \"company1\",\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 0,\n" +
+                        "                \"name\": \"employee0\",\n" +
+                        "                \"age\": 0,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 0\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 1,\n" +
+                        "                \"name\": \"employee1\",\n" +
+                        "                \"age\": 1,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 5000\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 2,\n" +
+                        "                \"name\": \"employee2\",\n" +
+                        "                \"age\": 2,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 10000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 3,\n" +
+                        "        \"name\": \"company2\",\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 0,\n" +
+                        "                \"name\": \"employee0\",\n" +
+                        "                \"age\": 0,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 0\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 1,\n" +
+                        "                \"name\": \"employee1\",\n" +
+                        "                \"age\": 1,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 5000\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 2,\n" +
+                        "                \"name\": \"employee2\",\n" +
+                        "                \"age\": 2,\n" +
+                        "                \"gender\": \"Female\",\n" +
+                        "                \"salary\": 10000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 4,\n" +
+                        "        \"name\": \"company4\",\n" +
                         "        \"employees\": [\n" +
                         "            {\n" +
                         "                \"id\": 0,\n" +

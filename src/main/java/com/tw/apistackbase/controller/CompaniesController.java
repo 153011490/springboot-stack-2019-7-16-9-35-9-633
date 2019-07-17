@@ -29,4 +29,10 @@ public class CompaniesController {
         return Company.getEmployessByCompanyId(id);
     }
 
+    @PostMapping
+    public List<Company> addCompany(@RequestBody Company company){
+        companies.add(company);
+        return companies;
+    }
+
 }
