@@ -25,6 +25,11 @@ public class EmployeesController {
         return employees.stream().filter(employee -> employee.getId()==id).collect(Collectors.toList());
     }
 
+    @PostMapping
+    public List<Employee> addEmployee(@RequestBody Employee employee){
+        employees.add(employee);
+        return employees;
+    }
 
 
 
