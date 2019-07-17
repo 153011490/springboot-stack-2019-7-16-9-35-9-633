@@ -5,6 +5,7 @@ import com.tw.apistackbase.modle.Employee;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/companies")
@@ -15,6 +16,7 @@ public class CompaniesController {
     @GetMapping
     public List<Company> getAllCompany(@RequestParam(value = "page",required = false,defaultValue = "-1") int page,
                                         @RequestParam(value = "pageSize",required = false,defaultValue = "-1") int pageSize){
+        companies=Company.createComponiess();
         if(page==-1&&pageSize==-1)return companies;
         return Company.getCompaniesByPage(page,pageSize);
     }
@@ -33,6 +35,12 @@ public class CompaniesController {
     public List<Company> addCompany(@RequestBody Company company){
         companies.add(company);
         return companies;
+    }
+
+    @PutMapping("/{id}")
+    public Company updateCompany(@PathVariable("id") int id,@RequestBody Company company){
+        Company.updateCompany(id,company);
+        return companies.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0);
     }
 
 }

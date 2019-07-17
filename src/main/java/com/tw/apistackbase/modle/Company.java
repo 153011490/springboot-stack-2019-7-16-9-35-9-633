@@ -50,6 +50,11 @@ public class Company {
         return companyList;
     }
 
+    public static void updateCompany(int id,Company company){
+        createComponiess();
+        companies=companies.stream().map(item->item.getId()==id?company:item).collect(Collectors.toList());
+    }
+
     public int getId() {
         return id;
     }
