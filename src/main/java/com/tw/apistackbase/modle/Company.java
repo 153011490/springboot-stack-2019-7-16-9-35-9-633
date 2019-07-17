@@ -36,6 +36,20 @@ public class Company {
         return companies.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0).getEmployees();
     }
 
+    public static List<Company> getCompaniesByPage(int page, int pageSize) {
+        List<Company> companyList=new ArrayList<>();
+        if(page*pageSize>companies.size()){
+            for (int i = (page-1)*pageSize; i < companies.size(); i++) {
+                companyList.add(companies.get(i));
+            }
+        }else{
+            for (int i = (page-1)*pageSize; i < page*pageSize; i++) {
+                companyList.add(companies.get(i));
+            }
+        }
+        return companyList;
+    }
+
     public int getId() {
         return id;
     }
