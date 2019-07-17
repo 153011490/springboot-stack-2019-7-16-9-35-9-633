@@ -3,9 +3,11 @@ package com.tw.apistackbase.modle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Company {
 
+    private int id;
     private String name;
 
     private List<Employee> employees;
@@ -16,11 +18,25 @@ public class Company {
         companies.clear();
         for (int i = 0; i <3 ; i++) {
             Company company=new Company();
+            company.id=i+1;
             company.name="company"+i;
             company.employees=Employee.createEmployees();
             companies.add(company);
         }
         return companies;
+    }
+
+    public static Company getComponyById(int id){
+        createComponiess();
+        return companies.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Employee> getEmployees() {
