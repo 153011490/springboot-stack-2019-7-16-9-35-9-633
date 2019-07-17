@@ -16,7 +16,7 @@ public class EmployeesController {
     public List<Employee> getAllEmployees(@RequestParam(value = "page",required = false,defaultValue = "-1") int page,
                                           @RequestParam(value = "pageSize",required = false,defaultValue = "-1") int pageSize,
                                           @RequestParam(value = "gender",required = false,defaultValue = "null")String gender){
-        if(page==-1&&pageSize==-1)return employees;
+        if(page==-1&&pageSize==-1&&gender.equals("null"))return employees;
         return Employee.getEmployees(page,pageSize,gender);
     }
 

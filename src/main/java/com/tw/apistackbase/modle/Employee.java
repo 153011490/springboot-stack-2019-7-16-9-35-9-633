@@ -14,6 +14,7 @@ public class Employee {
     private static List<Employee> employees=new ArrayList<>();
 
     public static List<Employee> createEmployees(){
+        employees.clear();
         for (int i = 0; i <3 ; i++) {
             Employee employee=new Employee();
             employee.setId(i);
@@ -27,7 +28,10 @@ public class Employee {
     }
 
     public static List<Employee> getEmployees(int page,int pageSize,String gender){
-        if(page<=0||pageSize<=0)return null;
+        createEmployees();
+        if(!gender.equals("null")){
+            return employees.stream().filter(employee -> employee.getGender().equals(gender)).collect(Collectors.toList());
+        }
         List<Employee> employeeList=new ArrayList<>();
         if(page*pageSize>employees.size()){
             for (int i = (page-1)*pageSize; i < employees.size(); i++) {
@@ -38,17 +42,16 @@ public class Employee {
                 employeeList.add(employees.get(i));
             }
         }
-        if(!gender.equals("null")){
-           return employees.stream().filter(employee -> employee.getGender()==gender).collect(Collectors.toList());
-        }
         return employeeList;
     }
     
     public static List<Employee> updateEmployee(int id,Employee employee){
+        createEmployees();
         return employees.stream().map(item->item.getId()==id?employee:item).collect(Collectors.toList());
     }
 
     public static List<Employee> deleteEmployee(int id) {
+        createEmployees();
         for (Employee employee : employees) {
             if(employee.getId()==id)employees.remove(employee);
         }
