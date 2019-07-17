@@ -36,6 +36,9 @@ public class EmployeesController {
         return Employee.updateEmployee(id,employee);
     }
 
-
+    @DeleteMapping("/{id}")
+    public List<Employee> deleteEmployee(@PathVariable("id") int id){
+        return Employee.deleteEmployee(id);
+    }
 
 }

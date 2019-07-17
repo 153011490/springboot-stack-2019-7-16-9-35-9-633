@@ -48,6 +48,13 @@ public class Employee {
         return employees.stream().map(item->item.getId()==id?employee:item).collect(Collectors.toList());
     }
 
+    public static List<Employee> deleteEmployee(int id) {
+        for (Employee employee : employees) {
+            if(employee.getId()==id)employees.remove(employee);
+        }
+        return employees;
+    }
+
     public int getId() {
         return id;
     }
