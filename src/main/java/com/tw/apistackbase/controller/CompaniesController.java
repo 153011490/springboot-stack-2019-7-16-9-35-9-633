@@ -33,6 +33,7 @@ public class CompaniesController {
 
     @PostMapping
     public List<Company> addCompany(@RequestBody Company company){
+        companies=Company.createComponiess();
         companies.add(company);
         return companies;
     }
@@ -43,4 +44,8 @@ public class CompaniesController {
         return companies.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0);
     }
 
+    @DeleteMapping("/{id}")
+    public List<Company> deleteCompony(@PathVariable("id") int id) {
+        return companies=companies.stream().filter(item->item.getId()!=id).collect(Collectors.toList());
+    }
 }
