@@ -31,6 +31,11 @@ public class Company {
         return companies.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0);
     }
 
+    public static List<Employee> getEmployessByCompanyId(int id){
+        createComponiess();
+        return companies.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0).getEmployees();
+    }
+
     public int getId() {
         return id;
     }
