@@ -2,6 +2,7 @@ package com.tw.apistackbase.modle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Employee {
     private int id;
@@ -25,7 +26,7 @@ public class Employee {
         return employees;
     }
 
-    public static List<Employee> getEmployees(int page,int pageSize){
+    public static List<Employee> getEmployees(int page,int pageSize,String gender){
         if(page<=0||pageSize<=0)return null;
         List<Employee> employeeList=new ArrayList<>();
         if(page*pageSize>employees.size()){
@@ -36,6 +37,9 @@ public class Employee {
             for (int i = (page-1)*pageSize; i < page*pageSize; i++) {
                 employeeList.add(employees.get(i));
             }
+        }
+        if(!gender.equals("null")){
+           return employees.stream().filter(employee -> employee.getGender()==gender).collect(Collectors.toList());
         }
         return employeeList;
     }
