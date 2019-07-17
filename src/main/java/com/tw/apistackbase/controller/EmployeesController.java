@@ -31,6 +31,11 @@ public class EmployeesController {
         return employees;
     }
 
+    @PutMapping("/{id}")
+    public List<Employee> updateEmployee(@PathVariable("id") int id,@RequestBody Employee employee){
+        return Employee.updateEmployee(id,employee);
+    }
+
 
 
 }

@@ -43,6 +43,10 @@ public class Employee {
         }
         return employeeList;
     }
+    
+    public static List<Employee> updateEmployee(int id,Employee employee){
+        return employees.stream().map(item->item.getId()==id?employee:item).collect(Collectors.toList());
+    }
 
     public int getId() {
         return id;

@@ -10,8 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -160,6 +159,44 @@ public class EmployeesControllerTest {
                         "    }\n" +
                         "]"));
     }
+
+    @Test
+    public void should_return_expected_employees_when_call_update_employees_given_employee() throws Exception {
+        String json="{\n" +
+                "\"id\":1,\n" +
+                "\"name\":\"XXX\",\n" +
+                "\"age\":19,\n" +
+                "\"gender\":\"Male\"\n" +
+                "}";
+        this.mockMvc.perform(put("/employees/1").contentType("application/json;charset=UTF-8").content(json)).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 0,\n" +
+                        "        \"name\": \"employee0\",\n" +
+                        "        \"age\": 0,\n" +
+                        "        \"gender\": \"Female\",\n" +
+                        "        \"salary\": 0\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"XXX\",\n" +
+                        "        \"age\": 19,\n" +
+                        "        \"gender\": \"Male\",\n" +
+                        "        \"salary\": 0\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 2,\n" +
+                        "        \"name\": \"employee2\",\n" +
+                        "        \"age\": 2,\n" +
+                        "        \"gender\": \"Female\",\n" +
+                        "        \"salary\": 10000\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
+
+
 }
 
 
